@@ -39,18 +39,29 @@ int main()
     srand(69);
     float w = rand_float()*10.0f;
     float eps = 1e-3;
-
+    /*
     printf("%f\n", cost(w));
-    //here the model is getting worse
+
+    here the model is getting worse
+
     printf("%f\n", cost(w + eps));
-    //let's try another direction
+
+    let's try another direction
+
     printf("%f\n", cost(w - eps));
-    //here it's getting better and better!
+
+    here it's getting better and better!
+
     printf("%f\n", cost(w - eps*2));
 
-    /* we need to differenciate the cost function */
+    we need to differenciate the cost function */
 
-    
+    float dcost = (cost(w + eps) - cost(w))/eps;
+    float rate = 1e-3;
+    printf("%f\n", cost(w));
+    w -= rate*dcost;
+    printf("%f\n", cost(w));
+
 
     return 0;
 }
