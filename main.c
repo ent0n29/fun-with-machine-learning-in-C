@@ -39,6 +39,7 @@ int main()
     srand(69);
     float w = rand_float()*10.0f;
     float eps = 1e-3;
+     float rate = 1e-3;
     /*
     printf("%f\n", cost(w));
 
@@ -56,12 +57,13 @@ int main()
 
     we need to differenciate the cost function */
 
-    float dcost = (cost(w + eps) - cost(w))/eps;
-    float rate = 1e-3;
-    printf("%f\n", cost(w));
-    w -= rate*dcost;
-    printf("%f\n", cost(w));
 
+    printf("%f\n", cost(w));
+for (size_t i = 0; i < 500; ++i){
+    float dcost = (cost(w + eps) - cost(w))/eps;
+    w -= rate*dcost;
+    printf("cost = %f, w = %f\n", cost(w), w);
+}
 
     return 0;
 }
