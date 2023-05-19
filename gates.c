@@ -32,7 +32,8 @@ sample nand_train[] = {
     {1,1,0},    
 };
 
-sample *train = nand_train;
+//choose here what you want to train: OR,AND,NAND gate
+sample *train = or_train;
 size_t train_count = 4;
 
 //XOR-gate using only AND, NAND, OR
