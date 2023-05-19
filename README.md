@@ -4,4 +4,5 @@
 
 it is possible to train a single neuron in order to make an OR, AND & NAND gates.
 But how we do a XOR gates, since it can't be modeled with 1 single neuron. Well, if we write XOR in terms of AND, OR & NAND, like for example (x|y) & ~(x&y).
-Now we can model a XOR-gate using 1 neuron!
+
+![NN-architecture](https://github.com/ent0n29/fun-with-machine-learning-in-C/assets/105303055/350d37c9-42da-4e71-927a-6d737081eb4d)
