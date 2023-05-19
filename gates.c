@@ -51,6 +51,7 @@ int main(void)
     float b  = rand_float();
 for (size_t i = 0; i < 1000*1000 ; ++i){
     float c = cost(w1, w2, b);
+    //printf("%f\n",c);
     printf("w1 = %f, w2 = %f, b = %f, c = %f\n", w1, w2, b, c);
     float dw1 = (cost(w1 + eps, w2, b) - c)/eps;
     float dw2 = (cost(w1, w2 + eps, b) - c)/eps;
@@ -61,11 +62,14 @@ for (size_t i = 0; i < 1000*1000 ; ++i){
 }
 printf("w1 = %f, w2 = %f, b = %f, c = %f\n", w1, w2, b, cost(w1, w2, b));
 
+//this is the forwarding (forward function)
+
 for (size_t i = 0; i < 2; ++i) {
         for (size_t j = 0; j < 2; ++j) {
             printf("%zu | %zu = %f\n", i, j, sigmoidf(i*w1 + j*w2 + b));
         }
     }
+
 
 return 0;
 
