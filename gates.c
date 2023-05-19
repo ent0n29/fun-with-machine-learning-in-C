@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
+
+//definining sigmoid function
+float sigmoidf(float x)
+{
+    return 1.f / (1.f + expf(-x));
+}
 
 // implementing an OR-gate
 float train[][3] = {
@@ -33,12 +40,12 @@ float cost(float w1, float w2){
 
 int main(void)
 {
-    srand(69);
-    float eps = 1e-3;
-    float rate = 1e-3;
+    srand(time(0));
+    float eps = 1e-2;
+    float rate = 1e-2;
     float w1 = rand_float();
     float w2 = rand_float();
-for (size_t i = 0; i < 1000; ++i){
+for (size_t i = 0; i < 1000*1000 ; ++i){
     float c = cost(w1, w2);
     printf("w1 = %f, w2 = %f, c = %f\n", w1, w2, c);
     float dw1 = (cost(w1+ eps, w2) - c)/eps;
