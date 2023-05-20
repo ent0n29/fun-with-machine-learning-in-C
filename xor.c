@@ -107,10 +107,96 @@ void print_xor(Xor m)
     printf("and_b = %f\n", m.and_b);
 }
 
+Xor learn(Xor m, Xor g, float rate)
+{
+    m.or_w1 -= rate*g.or_w1;
+    m.or_w2 -= rate*g.or_w2;
+    m.or_b -= rate*g.or_b;
+    m.nand_w1 -= rate*g.nand_w1;
+    m.nand_w2 -= rate*g.nand_w2;
+    m.nand_b -= rate*g.nand_b;
+    m.and_w1 -= rate*g.and_w1;
+    m.and_w2 -= rate*g.and_w2;
+    m.and_b -= rate*g.and_b;
+    return m;
+}
+
+Xor finite_diff(Xor m, float eps)
+{
+    Xor g;
+    float c = cost(m);
+    float saved;
+
+    saved = m.or_w1;
+    m.or_w1 += eps;
+    g.or_w1 = (cost(m) - c)/eps;
+    m.or_w1 = saved;
+
+    saved =  m.or_w2;
+    m.or_w2 += eps;
+    g.or_w2 = (cost(m) - c)/eps;
+    m.or_w2 = saved;
+
+    saved =  m.or_b;
+    m.or_b += eps;
+    g.or_b = (cost(m) - c)/eps;
+    m.or_b = saved;
+
+    saved =  m.nand_w1;
+    m.nand_w1 += eps;
+    g.nand_w1 = (cost(m) - c)/eps;
+    m.nand_w1 = saved;
+
+    saved =  m.nand_w2;
+    m.nand_w2 += eps;
+    g.nand_w2 = (cost(m) - c)/eps;
+    m.nand_w2 = saved;
+
+    saved =  m.nand_b;
+    m.nand_b += eps;
+    g.nand_b = (cost(m) - c)/eps;
+    m.nand_b = saved;
+
+    saved =  m.and_w1;
+    m.and_w1 += eps;
+    g.and_w1 = (cost(m) - c)/eps;
+    m.and_w1 = saved;
+
+    saved =  m.and_w2;
+    m.and_w2 += eps;
+    g.and_w2 = (cost(m) - c)/eps;
+    m.and_w2 = saved;
+
+    saved =  m.and_b;
+    m.and_b += eps;
+    g.and_b = (cost(m) - c)/eps;
+    m.and_b = saved;
+
+    return g;
+}
+
 int main(void)
 {
+    //srand(time(0));
     Xor m = rand_xor();
-    print_xor(m);
 
-    return 0;
+    float eps = 1e-1;
+    float rate = 1e-1;
+
+    for (size_t i = 0; i < 100*1000; ++i){
+        Xor g = finite_diff(m, eps);
+        m = learn(m, g, rate);
+        //printf("cost = %f\n", cost(m));
+    }
+    printf("cost = %f\n", cost(m));
+
+     printf("------------------------------\n");
+    for (size_t i = 0; i < 2; ++i) {
+        for (size_t j = 0; j < 2; ++j) {
+            printf("%zu | %zu = %f\n", i, j, forward(m, i, j));
+        }
+    }
+    
+return 0;
+
 }
