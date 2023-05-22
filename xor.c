@@ -201,7 +201,7 @@ Xor finite_diff(Xor m, float eps)
 
 int main(void)
 {
-    //srand(time(0));
+    srand(time(0));
     Xor m = rand_xor();
 
     float eps = 1e-1;
