@@ -46,6 +46,8 @@ for (size_t x = 0; x < 2; ++x){
 }
 */
 
+/*this model has a single neuron, and 2 inputs*/
+
 float rand_float(void)
 {
     return (float) rand()/ (float) RAND_MAX;
